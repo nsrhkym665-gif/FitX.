@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VORTEX GAMES - مكتبة الألعاب المباشرة</title>
+    <title>VORTEX GAMES - مكتبة الألعاب</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -48,8 +48,6 @@
             font-weight: 700; transition: 0.2s;
         }
         .btn-download:hover { background: #0066cc; }
-
-        #loading { text-align: center; padding: 50px; font-size: 18px; color: var(--text-sub); }
     </style>
 </head>
 <body>
@@ -59,55 +57,47 @@
     </header>
 
     <div class="container">
-        <h2 class="section-title">أحدث الألعاب المضافة</h2>
-        <div id="loading">جاري تحميل الألعاب من الجدول...</div>
-        <div class="grid" id="games-grid"></div>
+        <h2 class="section-title">أحدث الألعاب المتاحة للتحميل</h2>
+        <div class="grid">
+            
+            <!-- اللعبة الأولى -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e" alt="Cyberpunk 2077">
+                <div class="card-body">
+                    <div>
+                        <div class="card-title">Cyberpunk 2077</div>
+                        <div class="card-cat">Action / RPG</div>
+                    </div>
+                    <a href="https://archive.org/download/cyberpunk-2077-trailer-collection/Cyberpunk2077_Trailer.zip" target="_blank" class="btn-download">تحميل مباشر</a>
+                </div>
+            </div>
+
+            <!-- اللعبة الثانية -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc" alt="God of War">
+                <div class="card-body">
+                    <div>
+                        <div class="card-title">God of War</div>
+                        <div class="card-cat">Action / Adventure</div>
+                    </div>
+                    <a href="https://archive.org/download/GodOfWarIIIArcade/GodOfWar.zip" target="_blank" class="btn-download">تحميل مباشر</a>
+                </div>
+            </div>
+
+            <!-- اللعبة الثالثة -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420" alt="Spider-Man">
+                <div class="card-body">
+                    <div>
+                        <div class="card-title">Spider-Man Remastered</div>
+                        <div class="card-cat">Open World</div>
+                    </div>
+                    <a href="https://archive.org/download/spider-man-web-of-shadows_202103/Spider-Man.zip" target="_blank" class="btn-download">تحميل مباشر</a>
+                </div>
+            </div>
+
+        </div>
     </div>
 
-    <script>
-        // ضع رابط الـ CSV الخاص بجدول جوجل هنا:
-        const SHEET_CSV_URL = "استبدل_هذا_النص_برابط_الـ_CSV_بتاعك";
-
-        async function loadGames() {
-            try {
-                const response = await fetch(SHEET_CSV_URL);
-                const data = await response.text();
-                
-                const rows = data.split('\n').slice(1); // تجاهل السطر الأول (العناوين)
-                const grid = document.getElementById('games-grid');
-                document.getElementById('loading').style.display = 'none';
-
-                rows.forEach(row => {
-                    const cols = row.split(',');
-                    if (cols.length >= 4) {
-                        const title = cols[0].trim();
-                        const category = cols[1].trim();
-                        const image = cols[2].trim();
-                        const download = cols[3].trim();
-
-                        if (title && download) {
-                            const cardHTML = `
-                                <div class="card">
-                                    <img src="${image || 'https://via.placeholder.com/300x400'}" alt="${title}">
-                                    <div class="card-body">
-                                        <div>
-                                            <div class="card-title">${title}</div>
-                                            <div class="card-cat">${category}</div>
-                                        </div>
-                                        <a href="${download}" target="_blank" class="btn-download">تحميل مباشر</a>
-                                    </div>
-                                </div>
-                            `;
-                            grid.innerHTML += cardHTML;
-                        }
-                    }
-                });
-            } catch (error) {
-                document.getElementById('loading').innerText = "حدث خطأ أثناء تحميل البيانات. تحقَّق من رابط الجدول.";
-            }
-        }
-
-        loadGames();
-    </script>
 </body>
 </html>
